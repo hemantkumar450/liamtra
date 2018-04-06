@@ -1,0 +1,89 @@
+<!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+<div class="content">
+  <div class="well">
+    <app-manage-component [header]="serviceCategory.Header" [iconClass]="serviceCategory.IconClass" (saveChange)="saveServiceCategory()"
+      (cancelChange)="cancel()"></app-manage-component>
+
+    <div class="row">
+      <div class="col-lg-6" style="padding-top: 15px;">
+
+        <div class="form-group">
+          <label class="control-label required">Service Category Code </label>
+          <div>
+            <input type="text" [attr.disabled]="disabled" [maxlength]="100" OnlyAlphaNumeric="true" name="database" [(ngModel)]="serviceCategory.svcCatgCode"
+              class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label required">Service Category Description </label>
+          <div>
+            <input type="text" [maxlength]="200" [attr.disabled]="disabled" OnlyAlphaNumeric="true" name="database" [(ngModel)]="serviceCategory.svcCatgDesc"
+              class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="serviceCategory.svcCatgId > 0">
+          <label>Is Active</label>
+
+          <input type="checkbox" [(ngModel)]="serviceCategory.isActive" name="IsSecure" style="margin-left: 15px">
+
+        </div>
+
+        <div class="form-group">
+          <button (click)="addServiceSubCategory()" class="btn btn-primary">Add Sub Category</button>
+        </div>
+
+      </div>
+      <div class="col-lg-6"></div>
+      <div class="col-lg-10">
+        <p-dataTable [value]="serviceSubCategories" [globalFilter]="gb" scrollable="true" scrollHeight="300px" [rows]="10" [paginator]="true"
+          [pageLinks]="3" [responsive]="true">
+          <p-column header="Service Sub Category Code" [style]="{'text-align':'center'}" [filter]="true" [sortable]="true">
+            <ng-template let-serviceSubCategory="rowData" pTemplate="body">
+              <div *ngIf="!serviceSubCategory.isEdit && !serviceSubCategory.isDeleted"> {{serviceSubCategory.svcSCatgCode}} </div>
+              <div *ngIf="serviceSubCategory.isEdit && !serviceSubCategory.isDeleted">
+                <input type="text" [maxlength]="100" OnlyAlphaNumeric="true" class="form-control custom-width663" [(ngModel)]="serviceSubCategory.svcSCatgCode"
+                />
+              </div>
+            </ng-template>
+          </p-column>
+          <p-column header="Service Sub Category Desc" [style]="{'text-align':'center'}" [filter]="true" [sortable]="true">
+            <ng-template let-serviceSubCategory="rowData" pTemplate="body">
+              <div *ngIf="!serviceSubCategory.isEdit && !serviceSubCategory.isDeleted"> {{serviceSubCategory.svcSCatgDesc}} </div>
+              <div *ngIf="serviceSubCategory.isEdit && !serviceSubCategory.isDeleted">
+                <input type="text" [maxlength]="200" OnlyAlphaNumeric="true" class="form-control custom-width663" [(ngModel)]="serviceSubCategory.svcSCatgDesc"
+                />
+              </div>
+            </ng-template>
+          </p-column>
+          <!-- <p-column header="Active/Deactive" [style]="{'text-align':'center'}" [filter]="true" [sortable]="true">
+            <ng-template let-serviceSubCategory="rowData" pTemplate="body">
+              <div *ngIf="!serviceSubCategory.isDeleted"> {{serviceSubCategory.isActive}} </div>
+              <div *ngIf="serviceSubCategory.isEdit && !serviceSubCategory.isDeleted">
+                <input type="checkbox" [(ngModel)]="serviceSubCategory.isActive" name="isActive">
+              </div>
+            </ng-template>
+          </p-column> -->
+          <p-column styleClass="col-button" [style]="{'width':'200px','cursor':'pointer'}" header="Actions">
+            <ng-template let-serviceSubCategory="rowData" pTemplate="body">
+              <div style="padding-left: 30%">
+                <span *ngIf="!serviceSubCategory.isEdit">
+                  <i class="fa fa-fw fa-edit fa-lg" (click)="editServiceSubCategory(serviceSubCategory)"></i>
+                </span>
+                <span *ngIf="!serviceSubCategory.isEdit">|</span>
+                <span *ngIf="serviceSubCategory.isEdit" style="padding-left: 10%">
+                  <i class="fa fa-fw fa-times fa-lg" (click)="cancelSubCategory(serviceSubCategory)"></i>
+                </span>
+                <span *ngIf="!serviceSubCategory.isEdit">
+                  <i class="fa fa-fw fa-trash-o txt-color-red fa-lg" (click)="deleteServiceSubCategory(serviceSubCategory)"></i>
+                </span>
+              </div>
+            </ng-template>
+          </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+
+  </div>
+</div>

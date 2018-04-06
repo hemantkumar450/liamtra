@@ -1,0 +1,28 @@
+.tree {
+    min-height:20px;
+    padding:0px;
+   
+
+}
+ul {
+    list-style-type: none;
+  }
+
+  li {
+    list-style-type: none;
+  }
+  .badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    vertical-align: middle;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #999;
+    border-radius: 3px;
+}

@@ -1,0 +1,54 @@
+<div style="padding: 10px 14px;position: relative;">
+  <hy-navbar [totalDB]="totalDB" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar>
+  <!-- <div>
+    <select class="form-control" name="Country" (change)="getStatesByCountryId()" ui-select2 [(ngModel)]="state.countryId">
+      <option value="0">Select Country</option>
+      <option *ngFor="let country of countries" value="{{country.countryId}}">{{country.countryName}}</option>
+    </select>
+  </div> -->
+  <p-panel header="Filter Search" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+    <form class="smart-form ng-untouched ng-pristine ng-valid">
+      <fieldset>
+        <div class="row">
+          <section class="col col-1">
+            <label class="input">Country</label>
+          </section>
+          <section class="col col-3">
+            <p-dropdown placeholder='Please Select' filter="true" [style]="{'width':'80%'}" [options]="countries" name="Country" [(ngModel)]="state.countryId"></p-dropdown>
+          </section>
+        </div>
+      </fieldset>
+
+      <footer>
+        <button class="btn btn-primary" (click)="getStatesByCountryId()" type="submit">
+          Search
+        </button>
+      </footer>
+    </form>
+  </p-panel>
+  <hy-tableheader [tableHeader]="moduleName" [addFunctionName]="addFunctionName" (addnewSource)="addnewSource($event)"></hy-tableheader>
+
+  <p-dataTable [value]="states" [globalFilter]="gb" scrollable="true" scrollHeight="300px" [rows]="10" [paginator]="true" [pageLinks]="3"
+    [responsive]="true">
+    <p-column field="stateCode" header="State Code" [style]="{'text-align':'center','word-wrap':'break-word'}" filterMatchMode="contains" [filter]="true" [sortable]="true">
+      <ng-template let-state="rowData" pTemplate="body">
+        <div class="hfaDatabase"> {{state.stateCode}} </div>
+      </ng-template>
+    </p-column>
+    <p-column field="stateName" header="State Name" [style]="{'text-align':'center','word-wrap':'break-word'}" filterMatchMode="contains" [filter]="true" [sortable]="true"></p-column>
+    <p-column field="isActive" header="Is Active" [style]="{'text-align':'center','word-wrap':'break-word'}"  filterMatchMode="contains" [filter]="true" [sortable]="true"></p-column>
+    <p-column styleClass="col-button" [style]="{'width':'200px','cursor':'pointer','word-wrap':'break-word'}" header="Actions">
+      <ng-template let-state="rowData" pTemplate="body">
+        <div style="padding-left: 30%">
+          <span>
+            <i class="fa fa-fw fa-edit fa-lg" (click)="editState(state.stateId)"></i>
+          </span>
+          <span>|</span>
+          <span>
+            <i class="fa fa-fw fa-trash-o txt-color-red fa-lg" (click)="delete(state)"></i>
+          </span>
+        </div>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+</div>

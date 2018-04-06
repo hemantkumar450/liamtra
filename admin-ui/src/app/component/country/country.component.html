@@ -1,0 +1,22 @@
+<!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+<div style="padding: 10px 14px;position: relative;">
+  <hy-navbar [totalDB]="totalDB" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar>
+  <hy-tableheader [tableHeader]="moduleName" [addFunctionName]="addFunctionName" (addnewSource)="addCountry()"></hy-tableheader>
+
+
+  <p-dataTable [value]="countries" [globalFilter]="gb" scrollable="true" scrollHeight="300px" [rows]="10" [paginator]="true"
+    [pageLinks]="3" [responsive]="true">
+    <p-column field="countryCode" header="Country Code" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true" [sortable]="true" filterMatchMode="contains"></p-column>
+    <p-column field="countryName" header="Country Name" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true" [sortable]="true" filterMatchMode="contains"></p-column>
+    <p-column field="isActive" header="Is Active" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true" [sortable]="true" filterMatchMode="contains"></p-column>
+    <p-column styleClass="col-button" [style]="{'width':'200px','cursor':'pointer'}" header="Actions">
+      <ng-template let-serviceCategory="rowData" pTemplate="body">
+        <div style="padding-left: 40%">
+          <span>
+            <i class="fa fa-fw fa-edit fa-lg" (click)="editCountry(serviceCategory)"></i>
+          </span>
+        </div>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+</div>

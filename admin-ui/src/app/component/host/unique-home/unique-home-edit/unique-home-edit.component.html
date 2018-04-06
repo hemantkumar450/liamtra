@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-sm-12">
+
+    <div>
+      <ul id="myTab1" class="nav nav-tabs bordered" style="margin-top: 0.5px;">
+        <li [ngClass]="{'active': selectedTab=='Detail'}">
+          <a href="#s1" data-toggle="tab" aria-expanded="false" (click)="onTabSelect('Detail')">Host Detail</a>
+        </li>
+        <li [ngClass]="{'active': selectedTab=='Location'}">
+          <a href="#s2" data-toggle="tab" aria-expanded="false" (click)="onTabSelect('Location')">Location</a>
+        </li>
+        <li [ngClass]="{'active': selectedTab=='Listing'}">
+          <a href="#s3" data-toggle="tab" aria-expanded="false" (click)="onTabSelect('Listing')">Listing Detail</a>
+        </li>
+        <li [ngClass]="{'active': selectedTab=='Highlights'}">
+          <a href="#s4" data-toggle="tab" aria-expanded="false" (click)="onTabSelect('Highlights')">Highlights</a>
+        </li>
+        <li [ngClass]="{'active': selectedTab=='Attachment'}">
+          <a href="#s5" data-toggle="tab" aria-expanded="true" (click)="onTabSelect('Attachment')">Upload Image/Vedio</a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <app-manage-component [header]="header" [iconClass]="IconClass" (saveChange)="saveDetail()" (cancelChange)="cancel()"></app-manage-component>
+      <div id="myTabContent1" class="tab-content" style="padding-top:35px">
+        <div class="tab-pane fade  in " id="s1" [ngClass]="{'display-block': selectedTab =='Detail'}">
+          <app-unique-home-detail [uniqueHome]="uniqueHomeModel" *ngIf="uniqueHomeModel.countryId && serviceCategoryList.length>0"></app-unique-home-detail>
+        </div>
+        <div class="tab-pane fade in" id="s2" [ngClass]="{'display-block': selectedTab =='Location'}">
+          <app-unique-home-location [uniqueHome]="uniqueHomeModel" *ngIf="uniqueHomeModel.countryId && serviceCategoryList.length>0"></app-unique-home-location>
+        </div>
+        <div class="tab-pane fade in" id="s3" [ngClass]="{'display-block': selectedTab =='Listing'}">
+          <app-unique-home-listing [uniqueHome]="uniqueHomeModel" *ngIf="uniqueHomeModel.countryId && serviceCategoryList.length>0"></app-unique-home-listing>
+        </div>
+        <div class="tab-pane fade in" id="s4" [ngClass]="{'display-block': selectedTab =='Highlights'}">
+          <app-unique-home-highlights [uniqueHome]="uniqueHomeModel" *ngIf="uniqueHomeModel.countryId && serviceCategoryList.length>0"></app-unique-home-highlights>
+        </div>
+        <div class="tab-pane fade in" id="s5" [ngClass]="{'display-block': selectedTab =='Attachment'}">
+          <app-attachment-image [uniqueHome]="uniqueHomeModel" *ngIf="uniqueHomeModel.countryId && uniqueHomeModel.allAttachments.length>0"></app-attachment-image>
+          <app-attachment-video [uniqueHome]="uniqueHomeModel" *ngIf="uniqueHomeModel.countryId && uniqueHomeModel.allAttachments.length>0"></app-attachment-video>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>

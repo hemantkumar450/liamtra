@@ -1,0 +1,148 @@
+<p-growl [(value)]="messageModel" life="3000"></p-growl>
+
+<div class="content" style="padding-right:20px;padding-left: 20px">
+  <hy-navbar [totalDB]="totalDB" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar>
+  <div class="well" style="    padding-bottom: 0px;margin-bottom: 0px;">
+    <app-manage-component [header]="cmsDetail.Header" [iconClass]="cmsDetail.IconClass" (saveChange)="saveCmsDetails()" (cancelChange)="cancel()">
+    </app-manage-component>
+
+    <div class="row m-r-0">
+      <div class="col-lg-12" style="padding-left: 96px;padding-right: 76px;">
+
+        <div class="col-lg-4" style="padding-top: 15px;">
+          <div class="form-group">
+            <label class="control-label required">System Constant</label>
+            <div>
+              <p-dropdown name="userType" placeholder='Please Select System Constant' filter="true" [style]="{'width':'17em','height': '27px'}"
+                [options]="systemConstantList" [(ngModel)]="cmsDetail.sysConstantMainId" (onChange)="onSelectSystemConstant()"></p-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4" style="padding-top: 15px;" [@fadeInOut] *ngIf="cmsDetail.sysConstantMainId">
+          <div class="form-group">
+            <label class="required">System Sub Constant</label>
+            <div>
+              <p-dropdown name="userType" placeholder='Please Select System Sub Constant' filter="true" [style]="{'width':'17em','height': '27px'}"
+                [options]="systemConstantMainList" [(ngModel)]="cmsDetail.sysConstantId"></p-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4" style="padding-top: 15px;">
+          <div class="form-group">
+            <label class="required">Type</label>
+            <div>
+              <p-dropdown name="userType" placeholder='Please Select Type' filter="true" [style]="{'width':'17em','height': '27px'}" [options]="userServiceTypes"
+                [(ngModel)]="cmsDetail.type"></p-dropdown>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-12"> </div>
+
+      <div class="col-lg-12">
+
+        <div class=" col-lg-offset-1">
+          <div class="form-group col-lg-11" [@fadeInOut] *ngIf="cmsDetail.type === attachmentType.Image || cmsDetail.type === attachmentType.Video"
+            style="padding-left: 13px">
+            <label class="control-label">Attachment</label>
+            <div class="smart-form">
+              <div class="input input-file" style="width:96%">
+
+                <span class="button">
+                  <input id="file" name="file" (change)="onAttachmentSelect($event)" type="file">Browse
+                </span>
+
+                <input [(ngModel)]="cmsDetail.fileName" placeholder="Include some files" readonly="" type="text">
+
+                <div class="ui-fileupload-content ui-widget-content ui-corner-bottom image-container " *ngIf="cmsDetail.attachment && cmsDetail.attachment.length > 0 && !isAttachmentContainerDisabled">
+                  <div *ngFor="let file of cmsDetail.attachment; let i = index;">
+                    <div class="ui-fileupload-row col-lg-12 border-col" *ngIf="file.attachmentType === cmsDetail.type && file.isActive === true"
+                      [ngStyle]="{'background-color':i % 2 === 0 ?'#EDEDED':'white'}">
+                      <div class="col-md-10" style="padding-top:10px">
+
+                        <div class="col-md-2">
+                          <img class="image-size" *ngIf="file.attachmentId === 0 && file.attachmentType === attachmentType.Image " [src]="file.objectURL"
+                          />
+                          <img class="image-size" *ngIf="file.attachmentId > 0 && file.attachmentType === attachmentType.Image " src="{{ApiUrl.IMAGE_URI}}{{file.attachmentUrl}}"
+                          />
+                          <video style="width: 50px;    padding-top: 5px;" controls *ngIf="file.attachmentId === 0 && file.attachmentType === attachmentType.Video">
+                            <source [src]="file.objectURL" type="video/mp4">
+                          </video>
+                          <video style="width: 50px;    padding-top: 5px;" controls *ngIf="file.attachmentId > 0 && file.attachmentType === attachmentType.Video">
+                            <source src="{{ApiUrl.IMAGE_URI}}{{file.attachmentUrl}}" type="video/mp4">
+                          </video>
+                        </div>
+
+                        <div class="col-md-3" style="max-width: 100%">
+                          <a *ngIf="file.attachmentId === 0 " href="file.objectURL" target="__blank" style="max-width: 100%;word-wrap: break-word;">{{file.fileName}}</a>
+                          <a *ngIf="file.attachmentId > 0 " href="/VacancyImages/{{file.attachmentUrl}}" target="__blank" style="max-width: 100%;word-wrap: break-word;">{{file.fileName}}</a>
+                        </div>
+
+                        <div class="col-md-7">
+                          <input [(ngModel)]="file.cmsUrl" placeholder="URL " type="text">
+                        </div>
+
+                      </div>
+
+                      <div class="col-md-1 m-t-10">
+                        <p-checkbox binary="true" [(ngModel)]="file.isDefault"></p-checkbox>
+                        <span class="ui-button-icon-left ui-c fa fa-fw fa-close remove-icon" style="cursor: pointer;" (click)="remove(i,file)"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" [@fadeInOut] *ngIf="cmsDetail.type == attachmentType.Review">
+            <label class="control-label">Service</label>
+            <div class="ui-fileupload-content ui-widget-content ui-corner-bottom review-container " style="background-color: #F0F1F1;">
+              <div class="col-md-12 m-b-15" *ngFor="let review of reviewList; let i = index;">
+
+                <div class="col-md-1">
+                  <div class="col-md-12  user-name"></div>
+                </div>
+
+                <div class="col-md-11">
+                  <div class="talk-bubble tri-right left-in ">
+                    <div class="talktext">
+                      <p>{{review.reviewRemarks}}
+
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12" style="padding:0px;">
+                  <div class="name">
+                    {{review.userName}}
+                    <p-checkbox binary="true" [(ngModel)]="review.isDefault"></p-checkbox>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-group" [@fadeInOut] *ngIf="cmsDetail.type == attachmentType.Text">
+            <div class="ui-fileupload-content ui-widget-content ui-corner-bottom review-container " style="background-color: #F0F1F1;">
+              <div class="ui-fileupload-row col-lg-5">
+                <input style="width: 100%;" maxlength="100" [(ngModel)]="reviewModel.reviewRemarks" placeholder="Header Text" type="text">
+              </div>
+              <div class="ui-fileupload-row col-lg-7">
+                  <input style="width: 100%;" maxlength="100" [(ngModel)]="reviewModel.url" placeholder="url" type="text">
+                </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

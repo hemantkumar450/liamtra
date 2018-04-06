@@ -1,0 +1,69 @@
+<div class="content">
+  <div class="well">
+    <div class="row">
+      <div class="col-lg-6" style="padding-top: 15px;">
+        <div class="form-group">
+          <label class="control-label required">Amenities</label>
+          <div>
+            <p-multiSelect [style]="{'width':'40em','height': '27px'}" [options]="aminitiesData" [(ngModel)]="selectedAmenities" (onChange)="onMultiselectChange(109,$event)"></p-multiSelect>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Select any two key highlights of your place
+          </label>
+          <div>
+            <p-multiSelect [style]="{'width':'40em','height': '27px'}" [options]="highlightsPlaces" (onChange)="onMultiselectChange(110,$event)"
+              [(ngModel)]="selectedHighlights"></p-multiSelect>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">This place is good for </label>
+          <div>
+            <p-multiSelect [style]="{'width':'40em','height': '27px'}" [(ngModel)]="selectedPlaces" [options]="placesGoodFor" (onChange)="onMultiselectChange(111,$event)"></p-multiSelect>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Neighborhood </label>
+          <div>
+            <input type="text" [(ngModel)]="uniqueHome.hostStayDetail.neighbourhood" name="database" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Booking Preference </label>
+          <div>
+            <p-multiSelect [style]="{'width':'40em','height': '27px'}" (onChange)="onMultiselectChange(112,$event)" [options]="bookingData"
+              [(ngModel)]="selectedBookingPreference"></p-multiSelect>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Check-in Time</label>
+          <div>
+            <p-calendar [(ngModel)]="uniqueHome.hostStayDetail.checkInTime" [timeOnly]="true"></p-calendar>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Check-out Time
+          </label>
+          <div>
+            <p-calendar [(ngModel)]="uniqueHome.hostStayDetail.checkOutTime" [timeOnly]="true"></p-calendar>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">House Rules
+          </label>
+          <div>
+            <p-multiSelect [style]="{'width':'40em','height': '27px'}" [(ngModel)]="selectedHouseRules" [options]="houseRules" (onChange)="onMultiselectChange(113,$event)"></p-multiSelect>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Cancellation Policy
+          </label>
+          <div>
+            <p-multiSelect [style]="{'width':'40em','height': '27px'}" [(ngModel)]="selectedCancellationPolicy" [options]="cancellationPolicies"
+              (onChange)="onMultiselectChange(114,$event)"></p-multiSelect>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

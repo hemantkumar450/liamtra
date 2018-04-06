@@ -1,0 +1,260 @@
+<style>
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+
+  .dropdown {
+    margin-right: 32%;
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+  }
+</style>
+
+<div class="checkoutbg fixed-header1" style="position: relative;">
+  <div class="blank"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcum_wrap">
+          <a (click)="routeHomeSearch()" class="btn-search">Modify Search</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="details-ads">
+        <div class="details-left">
+          <h3>Hosted By {{homeDetail.hostName}}</h3>
+          <br>
+          <a class="btn-demo" style="cursor:pointer" (click)="openContactToHostModal()">Contact Host</a>
+        </div>
+        <div class="details-right">
+          <div>
+            <div *ngFor="let item of homeDetail.serviceCategory">
+              <div *ngIf="item.svcCatgId ===101">
+                Languages:
+                <label style="margin-right: 1%" *ngFor="let lang of item.serviceSubCategory;let index=index">
+                  <a *ngIf="index > 0">,</a>{{lang.svcSCatgDesc}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <p>Response rate:
+            <label>100%</label>
+          </p>
+          <p>Response time:
+            <label>within a few hours</label>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 margin-top20 left-checkout">
+      <div class="left-details-setion">
+        <h3>{{homeDetail.stayName}}</h3>
+        <p>{{bookUnique.CityName}}</p>
+        <div class="ratings" style="margin-top: 0;">
+          <rating [(ngModel)]="homeDetail.avgReviews" [max]="5" fullIcon="★" emptyIcon="☆" [readonly]="false" [disabled]="true" [float]="true"></rating>
+        </div>
+
+        <image-slider [slides]="homeDetail.images" [sliderCss]="sliderCss"></image-slider>
+
+        <div class="list-overview ">
+          <a class="a-cursor-pointer" (click)="scroll('overview')">Overview</a> |
+          <a class="a-cursor-pointer" (click)="scroll('target')">Reviews</a> |
+          <a class="a-cursor-pointer" (click)="scroll('thehost')">The Host</a> |
+          <a class="a-cursor-pointer" (click)="scroll('location')">Location</a> |
+          <a class="a-cursor-pointer dropdown" *ngIf="homeDetail.videos.length>0">Videos
+            <div class="dropdown-content">
+              <a *ngFor="let video of homeDetail.videos;let index=index" (click)="openVideoModal(video)">
+                video {{index+1}}
+              </a>
+            </div>
+          </a>
+        </div>
+        <div class="list-overview-wrap" #overview>
+          <p class="a-cursor-pointer">{{homeDetail.stayDesc}}</p>
+        </div>
+        <div class="list-overview-wrap">
+          <h3>Amenities</h3>
+          <ul>
+            <li *ngFor="let amenity of homeDetail.amenities" style="width: 20%">
+              <img style="width: 60%;" [src]="amenity.imgSrc" />
+            </li>
+          </ul>
+        </div>
+
+        <div *ngFor="let item of homeDetail.serviceCategory">
+          <div class="list-overview-wrap" *ngIf="item.svcCatgId != serviceCategoryEnum.Amenities">
+            <h3>{{item.svcCatgDesc}}</h3>
+            <ul *ngFor="let subCat of item.serviceSubCategory let i = index">
+              <p class="a-cursor-pointer">
+                <a *ngIf="i > 0"> | </a> {{subCat.svcSCatgDesc}} &nbsp;
+              </p>
+            </ul>
+          </div>
+        </div>
+
+        <div class="list-overview-wrap" *ngIf="homeDetail.reviews && homeDetail.reviews.length == 0" #target>
+          <!-- <h3></h3> -->
+          <div style="margin-bottom: 1%" *ngIf="homeDetail.canReview">
+            <div style="float: left;width: 50%;">
+              <h3>No reviews (yet)</h3>
+            </div>
+            <div style="font-size: medium;">
+              <img style="float: left;margin-right: 1%;height: 25px;width: 25px;" src="assets/images/add-comment.png" width="52" height="52">
+              <a class="btn-demo" style="cursor:pointer" (click)="openReviewModal()">Add Review</a>
+            </div>
+          </div>
+
+          <div *ngIf="!homeDetail.canReview">
+            <h3>No reviews (yet)</h3>
+          </div>
+
+          <ul>
+            <li>
+              This home doesn’t have any reviews. If you stay here, your review will appear here.
+            </li>
+          </ul>
+        </div>
+
+        <div class="list-overview-wrap" *ngIf="homeDetail.reviews && homeDetail.reviews.length>0" #target>
+          <div style="margin-bottom: 1%" *ngIf="homeDetail.canReview">
+            <div style="float: left;width: 50%;">
+              <h3>Reviews</h3>
+            </div>
+            <div style="font-size: medium;">
+              <img style="float: left;margin-right: 1%;height: 25px;width: 25px;" src="assets/images/add-comment.png" width="52" height="52">
+              <a class="btn-demo" style="cursor:pointer" (click)="openReviewModal()">Add Review</a>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 1%" *ngIf="!homeDetail.canReview">
+            <h3>Reviews</h3>
+          </div>
+
+          <ul>
+            <li *ngFor="let review of homeDetail.reviews">
+              <div class="col-lg-12" style="padding: 0;margin-left: -14px;">
+                <div class="col-lg-2">
+                  <img style="float: left;margin-right: 2%;" src="assets/images/test-img.png" width="52" height="52">
+                </div>
+                <div class="col-lg-10">
+                  {{review.reviewRemarks| truncate : 60}}
+                </div>
+                <div class="col-lg-12" style="padding: 0">
+                  <div class="col-lg-7" style="opacity:0.6">
+                    <b>{{review.userName}}</b>
+                  </div>
+                  <div class="col-lg-5" style="opacity:0.6">
+                    {{review.creationDate| date: 'dd-MMM-yyyy'}}
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="list-overview-wrap" #thehost>
+          <h3>Host Description</h3>
+          <p class="a-cursor-pointer">{{homeDetail.hostDesc}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 margin-top20">
+      <div class="right-checkout-wrap">
+        <div class="detail_right_price">
+          <label>{{homeDetail.roomPrice | number:'.2-5'}} /</label>
+          <span>Night</span>
+        </div>
+        <div class="right-checkout-wrap-mid no-border">
+          <div class="date_checkin">
+            <span>Check In</span>
+            <div class="checkin-input">{{bookUnique.CheckIn}}</div>
+          </div>
+          <div class="date_checkin">
+            <span>Check Out</span>
+            <div class="checkin-input">{{bookUnique.CheckOut}}</div>
+          </div>
+          <div class="guest_checkin">
+            <span>Guest</span>
+            <select [(ngModel)]="bookUnique.NumberofGuestsInRoom">
+              <option *ngFor="let guest of totalGuests" [ngValue]="guest.svcSCatgDesc">{{guest.svcSCatgDesc}}</option>
+            </select>
+          </div>
+
+          <div class="checkout-price-mid">
+            <div class="left-checkout-price-mid">{{homeDetail.roomPrice | number:'.2-5'}} * {{numberOfDays}} night</div>
+            <div class="right-checkout-price-mid">{{homeDetail.roomPrice * numberOfDays | number:'.2-5'}}</div>
+          </div>
+          <div *ngFor="let hostCharge of homeDetail.hostCharges">
+            <div class="checkout-price-mid">
+              <div class="left-checkout-price-mid">{{hostCharge.svcSCatgDesc}}</div>
+              <div class="right-checkout-price-mid">{{hostCharge.amount | number:'.2-5'}}</div>
+            </div>
+          </div>
+          <div class="checkout-price-mid border-topbg">
+            <div class="left-checkout-price-mid">Total</div>
+            <div class="right-checkout-price-mid">{{totalPrice | number:'.2-5'}}</div>
+          </div>
+        </div>
+        <div class="right-checkout-price-btm">
+          <a (click)="bookUniqueHome()" class="btn-custom" style="cursor:pointer">Book Now</a>
+          <a (click)="openDialog()" class="btn-report" style="cursor:pointer">Report this Listing</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="map" #location>
+        <app-google-map [mapSearch]="bookUnique.CityName" [locationCss]="locationCss"></app-google-map>
+      </div>
+    </div>
+  </div>
+</div>
+<app-login-modal *ngIf="modal" (modalPopupEvent)="modalPopupEvent($event)" [modal]="modal" [modalStatus]="modalStatus"></app-login-modal>
+
+<app-general-modal [modalType]="modalType" *ngIf="contactToHost" (contactToHostmodalPopupEvent)="contactToHostmodalPopupEvent($event)"
+  [modal]="contactToHost" [svcId]="homeDetail.svcId" [ownerId]="homeDetail.ownerId"></app-general-modal>
+
+<!-- <app-general-modal [modalType]="modalType" *ngIf="modalType === 2" (contactToHostmodalPopupEvent)="contactToHostmodalPopupEvent($event)"
+  [modal]="contactToHost" [ownerId]="homeDetail.ownerId"></app-general-modal> -->
+
+
+<app-video-modal *ngIf="isVideoModal" [videobaseModal]="videobaseModal" [isVideoModal]="isVideoModal" (vidoeModalPopupEvent)="vidoeModalPopupEvent($event)"></app-video-modal>

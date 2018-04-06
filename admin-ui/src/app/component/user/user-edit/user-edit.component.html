@@ -1,0 +1,178 @@
+<style>
+  .inputType {
+    border-radius: 4px !important;
+  }
+
+  .labelType {
+    padding-top: 22px;
+  }
+
+  .newForm {
+    margin-bottom: 0px !important
+  }
+</style>
+
+<!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+<div class="content">
+  <div class="well">
+    <!-- <form role="form" style="padding-left: 10px" #myForm="ngForm" novalidate class="mb-lg smart-form" method="post" id="login-form"> -->
+
+    <form #myForm="ngForm" novalidate (ngSubmit)="saveUser(myForm.valid)" style="padding-left: 10px">
+      <app-manage-component [header]="userModel.Header" [isFormValid]="myForm.valid" [iconClass]="userModel.IconClass" (saveChange)="saveUser(myForm.submitted =$event)"
+        (cancelChange)="onCancel()"></app-manage-component>
+      <div class="row">
+        <div class="form-group">
+
+
+          <div class="col-xs-4 labelType">
+            <label class="control-label required">First Name</label>
+            <div class="form-group newForm value">
+              <input name="Name" OnlyAlphaNumeric="true" [maxlength]="100" [(ngModel)]="userModel.userFirstName" #nameValidate="ngModel"
+                [attr.maxlength]="200" class="form-control inputType" required/>
+            </div>
+            <div [hidden]="nameValidate.pristine && !myForm.submitted && nameValidate.untouched" style="position:fixed">
+              <div *ngIf="nameValidate.errors" class="text-danger">
+                First Name is required
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-xs-4 labelType">
+            <label class="control-label">Middle Name</label>
+            <div class="form-group newForm value ">
+              <input name="MiddleName" [maxlength]="100" OnlyAlphaNumeric="true" [(ngModel)]="userModel.userMiddleName" #middleNameValidate="ngModel"
+                required [attr.maxlength]="200" class="form-control inputType" />
+            </div>
+          </div>
+
+          <div class="col-xs-4 labelType">
+            <label class="control-label required">Last Name</label>
+            <div class="form-group newForm  value ">
+              <input [maxlength]="100" name="LastName" OnlyAlphaNumeric="true" [(ngModel)]="userModel.userLastName" #lastNameValidate="ngModel"
+                required [attr.maxlength]="200" class="form-control inputType" />
+            </div>
+            <div [hidden]="lastNameValidate.pristine && !myForm.submitted && lastNameValidate.untouched" style="position:fixed">
+              <div *ngIf="lastNameValidate.errors" class="text-danger">
+                Last Name is required
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-xs-4 labelType">
+            <label class="control-label required">User Name</label>
+            <div class="form-group newForm  value ">
+              <input [maxlength]="500" name="UserName" OnlyAlphaNumeric="true" [(ngModel)]="userModel.userName" #userNameValidate="ngModel"
+                required [attr.maxlength]="200" class="form-control inputType" />
+            </div>
+            <div [hidden]="userNameValidate.pristine && !myForm.submitted && userNameValidate.untouched" style="position:fixed">
+              <div *ngIf="userNameValidate.errors" class="text-danger">
+                User Name is required
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-xs-4 labelType">
+            <label class="control-label required">Email</label>
+            <div class="form-group newForm  value ">
+              <input name="text" [readonly]="readonly" [maxlength]="200" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="userModel.userEmail"
+                #emailValidate="ngModel" class="form-control inputType" required/>
+
+              <span *ngIf="(emailValidate.touched || emailValidate.dirty) && emailValidate.errors" style="position:fixed">
+                <span *ngIf="emailValidate.errors" class="text-danger">
+                  Email is required
+                </span>
+                <span *ngIf="emailValidate.errors.pattern" class="text-danger">
+                  Not valid email address.
+                </span>
+              </span>
+            </div>
+          </div>
+
+
+          <div class="col-xs-4 labelType">
+            <label class="control-label required">Password</label>
+            <div class="form-group newForm  value ">
+              <input type="password" [readonly]="readonly" [maxlength]="100" name="Password" [(ngModel)]="userModel.userPwd" #passwordValidate="ngModel"
+                required [attr.maxlength]="200" class="form-control inputType" />
+            </div>
+            <div [hidden]="passwordValidate.pristine && !myForm.submitted && passwordValidate.untouched" style="position:fixed">
+              <div *ngIf="passwordValidate.errors && passwordValidate.errors.required" class="text-danger">
+                Password is required
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-xs-4 labelType">
+            <label class="control-label required">Contact No.</label>
+            <div class="form-group newForm value ">
+              <input type="text" name="ContactNo" OnlyDecimalNumber="true" [maxlength]="100" [(ngModel)]="userModel.userContactNo" #contactValidate="ngModel"
+                required [attr.maxlength]="200" class="form-control inputType" />
+            </div>
+            <div [hidden]="contactValidate.pristine && !myForm.submitted && contactValidate.untouched" style="position:fixed">
+              <div *ngIf="contactValidate.errors && contactValidate.errors.required" class="text-danger">
+                Contact No. is required
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-xs-4 labelType">
+            <div>
+              <label class="control-label required">User Type</label>
+              <div class="form-group newForm has-feedback">
+                <p-dropdown name="userType" placeholder='Please Select User Type' filter="true" [style]="{'width':'95%','height': '32px'}"
+                  [options]="userTypes" [(ngModel)]="userModel.userTypeId" required></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-4 labelType">
+            <div>
+              <label class="control-label required">Status</label>
+              <div class="form-group newForm has-feedback">
+                <p-dropdown name="status" placeholder='Please Select Status' filter="true" [style]="{'width':'95%','height': '32px'}" [options]="userStatus"
+                  [(ngModel)]="userModel.userStatus"></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-4 labelType">
+            <div>
+              <label class="control-label required">Gender</label>
+              <div class="form-group newForm has-feedback">
+                <p-dropdown name="gender" placeholder='Please Select Gender' filter="true" [style]="{'width':'95%','height': '32px'}" [options]="gender"
+                  [(ngModel)]="userModel.gender"></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-xs-4 labelType" *ngIf='userModel.userId > 0'>
+            <div>
+              <label class="control-label">Service Type</label>
+              <div class="form-group newForm has-feedback">
+                <p-multiSelect name="serviceType" [style]="{'width':'100%'}" optionLabel="svcTypeName" [options]="userModel.serviceTypes"
+                  [(ngModel)]="userModel.serviceTypes" placeholder="Select Service Type" disabled=true;>
+                </p-multiSelect>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="col-xs-4 labelType" *ngIf='userModel.userId > 0' style='padding-top:8px'>
+            <div>
+              <label class="control-label"></label>
+              <div class="form-group newForm has-feedback" style="margin-top: 20px">
+                <label>Is Active</label>
+                <input type="checkbox" name="isActive" [(ngModel)]="userModel.isActive" name="IsSecure" style="margin-left: 15px">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

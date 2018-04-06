@@ -1,0 +1,228 @@
+<div class="row">
+
+  <div class="col-sm-12">
+    <div>
+      <ul id="myTab1" class="nav nav-tabs bordered" style="margin-top: 0.5px;">
+        <li [ngClass]="{'active': selectedTab=='Info'}">
+          <a href="#s1" data-toggle="tab" aria-expanded="false" (click)="getTourInfo()">Tour Info</a>
+        </li>
+        <li [ngClass]="{'active': selectedTab=='HostTourRoute'}">
+          <a href="#s2" data-toggle="tab" aria-expanded="false" (click)="getHostTourRoute()" [class.disabled]="hostTour.tourId == 0">Tour Routes</a>
+        </li>
+        <li [ngClass]="{'active': selectedTab=='SubCategory'}">
+          <a href="#s3" data-toggle="tab" aria-expanded="false" (click)="getTourSubCategories()" [class.disabled]="hostTour.tourId == 0">Tour Categories</a>
+        </li>
+        <li [ngClass]="{'active': selectedTab=='Itenary'}">
+          <a href="#s4" data-toggle="tab" aria-expanded="false" (click)="getTourItenaries()" [class.disabled]="hostTour.tourId == 0">Tour Itenary</a>
+        </li>
+        <li [ngClass]="{'active': selectedTab=='Departure'}">
+          <a href="#s5" data-toggle="tab" aria-expanded="true" (click)="getTourDepartures()" [class.disabled]="hostTour.tourId == 0">Tour Departure</a>
+        </li>
+
+        <li [ngClass]="{'active': selectedTab=='Attachment'}">
+          <a href="#s6" data-toggle="tab" aria-expanded="true" (click)="getTourAttachments()" [class.disabled]="hostTour.tourId == 0">Tour Attachments</a>
+        </li>
+
+
+      </ul>
+
+    </div>
+
+    <div>
+      <div id="myTabContent1" class="tab-content" style="padding-top:20px">
+        <div class="tab-pane fade  in " [ngClass]="{'display-block': selectedTab =='Info'}" id="s1">
+
+          <!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+          <div class="content">
+            <div class="well">
+              <app-manage-component [header]="hostTour.Header" [iconClass]="hostTour.IconClass" (saveChange)="saveHostTour()" (cancelChange)="cancel()"></app-manage-component>
+
+
+
+              <div class="row">
+                <div class="col-lg-6" style="padding-top: 15px;">
+
+                  <div class="form-group">
+                    <label class="control-label required">Host Service Name</label>
+                    <div>
+                      <input type="text" [maxlength]="200" name="database" [(ngModel)]="hostTour.svcName" class="form-control ng-pristine ng-valid">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Host Service Desc. </label>
+                    <div>
+                      <textarea type="text" [maxlength]="7000" name="database" [(ngModel)]="hostTour.svcDesc" rows="5" cols="70" class="form-control ng-pristine ng-valid">
+                      </textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Country</label>
+                    <div>
+                      <p-dropdown name="userType" placeholder='Please Select Country ' filter="true" [style]="{'width':'40em','height': '27px'}"
+                        [options]="countries" [(ngModel)]="hostTour.hostService.countryId" (onChange)="getStatesByCountryId(hostTour.hostService.countryId)"></p-dropdown>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">State</label>
+                    <div>
+                      <p-dropdown name="userType" placeholder='Please Select State' filter="true" [style]="{'width':'40em','height': '27px'}" [options]="states"
+                        [(ngModel)]="hostTour.hostService.stateId" (onChange)="getCityListByCityId(hostTour.hostService.stateId)"></p-dropdown>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">City</label>
+                    <div>
+                      <p-dropdown name="userType" placeholder='Please Select City' filter="true" [style]="{'width':'40em','height': '27px'}" [options]="cities"
+                        [(ngModel)]="hostTour.hostService.cityId"></p-dropdown>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Address1</label>
+                    <div>
+                      <input type="text" [maxlength]="1000" name="database" [(ngModel)]="hostTour.hostService.address1" class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Address2</label>
+                    <div>
+                      <input type="text" [maxlength]="1000" name="database" [(ngModel)]="hostTour.hostService.address2" class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Landmark</label>
+                    <div>
+                      <input type="text" [maxlength]="100" name="database" [(ngModel)]="hostTour.hostService.landmark" class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Zip Code</label>
+                    <div>
+                      <input type="text" [maxlength]="6" name="database" [(ngModel)]="hostTour.hostService.zipCode" class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Contact No</label>
+                    <div>
+                      <input type="text" [maxlength]="10" name="database" [(ngModel)]="hostTour.hostService.contactNo" class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label class="control-label required">Email Id</label>
+                    <div>
+                      <input type="text" [maxlength]="50" name="database" [(ngModel)]="hostTour.hostService.eMailId " class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+                  <div class="form-group" *ngIf="hostTour.tourId > 0">
+                    <label>Is Active</label>
+                    <input type="checkbox" [(ngModel)]="hostTour.isActive" style="margin-left: 15px" name="IsSecure">
+                  </div>
+
+                </div>
+
+                <div class="col-lg-6" style="padding-top: 15px;">
+
+                  <div class="form-group">
+                    <label class="control-label required">Tour Overview</label>
+                    <div>
+                      <textarea type="text" [maxlength]="10000" name="database" [(ngModel)]="hostTour.tourOverview" rows="9" cols="70" class="form-control ng-pristine ng-valid">
+                      </textarea>
+                    </div>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label class="control-label required">Total Adult Capacity</label>
+                    <div>
+                      <input type="number" [maxlength]="10" name="database" [(ngModel)]="hostTour.totalAdultCapacity" class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Total Child Capacity</label>
+                    <div>
+                      <input type="number" [maxlength]="10" name="database" [(ngModel)]="hostTour.totalChildCapacity" class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Price Per Pax</label>
+                    <div>
+                      <input type="number" [maxlength]="10" name="database" [(ngModel)]="hostTour.pricePerPax" class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label required">Total Price</label>
+                    <div>
+                      <input type="number" [maxlength]="10" name="database" [(ngModel)]="hostTour.totalPrice" class="form-control ng-pristine ng-valid">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">Tour Itenary Status</label>
+                    <div>
+                      <p-dropdown name="userType" placeholder='Please Select Tour Itenary Status' filter="true" [style]="{'width':'40em','height': '27px'}"
+                        [options]="itenaryStatusList" [(ngModel)]="hostTour.tourItenaryStatus"></p-dropdown>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">Total Booked Adult Capacity :</label>
+                    <span> {{hostTour.totalBookedAdultCapacity}}</span>
+                    <label class="control-label">Total Booked Child Capacity :</label>
+                    <span>{{hostTour.totalBookedChildCapacity}}</span>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="s2">
+
+        </div>
+
+        <div class="tab-pane fade" id="s3">
+
+        </div>
+
+        <div class="tab-pane fade" id="s4">
+
+        </div>
+
+        <div class="tab-pane fade" id="s5">
+
+        </div>
+
+        <div class="tab-pane fade" id="s6">
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>
+
+
+<router-outlet></router-outlet>

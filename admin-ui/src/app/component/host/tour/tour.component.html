@@ -1,0 +1,41 @@
+<!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+<div style="padding: 10px 14px;position: relative;">
+
+    <!--<p-panel header="Filter Search" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+
+        <form class="smart-form ng-untouched ng-pristine ng-valid">
+            <fieldset>
+            </fieldset>
+            <footer>
+            </footer>
+        </form>
+    </p-panel>-->
+
+    <hy-navbar [totalDB]="totalDB" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar>
+    <hy-tableheader [tableHeader]="moduleName" [addFunctionName]="addFunctionName" (addnewSource)="addTour()"></hy-tableheader>
+
+    <p-dataTable [value]="hostTours" [globalFilter]="gb" scrollable="true" scrollHeight="300px" [rows]="10" [paginator]="true"
+        [pageLinks]="3" [responsive]="true">
+        <p-column field="svcName" header="Service Name" filterMatchMode="contains" [style]="{'text-align':'center'}" [filter]="true"
+            [sortable]="true"></p-column>
+        <p-column field="totalPrice" header="Total Price" filterMatchMode="contains" [style]="{'text-align':'center'}" [filter]="true"
+            [sortable]="true"></p-column>
+        <p-column field="cityName" header="City Name" filterMatchMode="contains" [style]="{'text-align':'center'}" [filter]="true"
+            [sortable]="true"></p-column>
+        <p-column field="countryName" header="Country Name" filterMatchMode="contains" [style]="{'text-align':'center'}" [filter]="true"
+            [sortable]="true"></p-column>
+        <p-column field="isActive" header="Is Active" filterMatchMode="contains" [style]="{'text-align':'center'}" [filter]="true"
+            [sortable]="true"></p-column>
+        <p-column styleClass="col-button" [style]="{'width':'200px','cursor':'pointer'}" header="Actions">
+            <ng-template let-tour="rowData" pTemplate="body">
+                <div style="padding-left: 40%">
+                    <span>
+                        <i class="fa fa-fw fa-edit fa-lg" (click)="editHostTour(tour)"></i>
+                    </span>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+</div>
+
+<router-outlet></router-outlet>

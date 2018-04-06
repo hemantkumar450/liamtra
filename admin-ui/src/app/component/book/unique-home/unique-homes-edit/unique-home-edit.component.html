@@ -1,0 +1,241 @@
+<div class="col-sm-12">
+  <div>
+    <ul id="myTab1" class="nav nav-tabs bordered" style="margin-top: 0.5px;">
+      <li [ngClass]="{'active': selectedTab=='AllDetail'}">
+        <a href="#s1" data-toggle="tab" aria-expanded="false" (click)="onTabSelect('AllDetail')">All Details</a>
+      </li>
+      <li [ngClass]="{'active': selectedTab=='BookingCharges'}">
+        <a href="#s5" data-toggle="tab" aria-expanded="true" (click)="onTabSelect('BookingCharges')">Booking Charges </a>
+      </li>
+      <li [ngClass]="{'active': selectedTab=='Attachments'}">
+        <a href="#s6" data-toggle="tab" aria-expanded="true" (click)="onTabSelect('Attachments')">Attachments</a>
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- <div> -->
+  <div id="myTabContent1" class="tab-content" style="padding-top:20px">
+    <div class="tab-pane fade  in " id="s1" [ngClass]="{'display-block': selectedTab =='AllDetail'}">
+
+      <div class="content well" style="height: 450px;overflow-y: auto;">
+        <div>
+
+          <div style="font-weight: bold; font-size: 13px; padding-top: 0px;font-size: large;" class="ng-binding background-color">
+            <i></i>Guest Details</div>
+          <br>
+
+          <div class="form-group">
+            <div class="col-xs-12 labelType" style="word-wrap: break-word;">
+              <div class="col-xs-2 labelType">
+                <label class="control-label boldText">Status</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.statusType"> {{bookedUniqueHomeModel.statusType}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.statusType"> null </div>
+              </div>
+              <div class="col-xs-2 labelType">
+                <label class="control-label boldText">Booked By</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookerName"> {{bookedUniqueHomeModel.bookerName}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookerName"> null </div>
+              </div>
+              <div class="col-xs-2 labelType">
+                <label class="control-label boldText">Guest Name</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookStay.guestName"> {{bookedUniqueHomeModel.bookStay.guestName}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookStay.guestName"> null </div>
+              </div>
+              <div class="col-xs-2 labelType">
+                <label class="control-label boldText">Guest Email</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookStay.emailId"> {{bookedUniqueHomeModel.bookStay.emailId}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookStay.emailId"> null </div>
+              </div>
+              <div class="col-xs-2 labelType">
+                <label class="control-label boldText">Guest Contact</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookStay.contactNumber"> {{bookedUniqueHomeModel.bookStay.contactNumber}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookStay.contactNumber"> null </div>
+              </div>
+              <div class="col-xs-4">
+                <label class="control-label"></label>
+                <div class="form-group newForm value"> </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div style="font-weight: bold; font-size: 13px; padding-top: 0px;font-size: large;margin-top: 60px;" class="ng-binding background-color">
+            <i></i>Booking Details</div>
+          <br>
+
+          <div class="form-group">
+            <div class="col-xs-12 labelType" style="word-wrap: break-word;">
+              <div class="col-xs-2 labelType">
+                <label class="control-label boldText">Check In Time</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookStay.checkIn">
+                  {{bookedUniqueHomeModel.bookStay.checkIn | date:'yyyy-MMM-dd HH:mm'}}
+                </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookStay.checkIn"> null </div>
+              </div>
+
+              <div class="col-xs-2 labelType">
+                <label class="control-label boldText">Check Out Time</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookStay.checkOut">
+                  {{bookedUniqueHomeModel.bookStay.checkOut | date:'yyyy-MMM-dd HH:mm'}}
+                </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookStay.checkOut"> null </div>
+              </div>
+
+              <div class="col-xs-2 labelType">
+                <label class="control-label boldText">No. Of Days</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookStay.noOfDays"> {{bookedUniqueHomeModel.bookStay.noOfDays}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookStay.noOfDays"> null </div>
+              </div>
+
+              <div class="col-xs-3 labelType">
+                <label class="control-label boldText">No. Of Adult Guests</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookStay.noOfAdultGuests"> {{bookedUniqueHomeModel.bookStay.noOfAdultGuests}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookStay.noOfAdultGuests"> null </div>
+              </div>
+
+              <div class="col-xs-2 labelType">
+                <label class="control-label boldText">Status</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.statusType"> {{bookedUniqueHomeModel.statusType}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.statusType"> null </div>
+              </div>
+              <div class="col-xs-1">
+                <label class="control-label"></label>
+                <div class="form-group newForm value"> </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div style="font-weight: bold; font-size: 13px; padding-top: 0px;font-size: large;margin-top: 60px" class="ng-binding background-color">
+            <i></i>Host Details</div>
+          <br>
+
+          <div class="form-group">
+            <div class="col-xs-12 labelType" style="word-wrap: break-word;">
+              <div class="col-xs-2">
+                <label class="control-label boldText">Hosted By</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.ownerName"> {{bookedUniqueHomeModel.ownerName}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.ownerName"> null </div>
+              </div>
+              <div class="col-xs-2">
+                <label class="control-label boldText">Host Name</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.hostName"> {{bookedUniqueHomeModel.hostName}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.hostName"> null </div>
+              </div>
+              <div class="col-xs-2">
+                <label class="control-label boldText">Host Contact</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.contactNumber"> {{bookedUniqueHomeModel.contactNumber}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.contactNumber"> null </div>
+              </div>
+              <div class="col-xs-2">
+                <label class="control-label boldText">Host Email</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.emailId"> {{bookedUniqueHomeModel.emailId}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.emailId"> null </div>
+              </div>
+              <div class="col-xs-6">
+                <label class="control-label"></label>
+                <div class="form-group newForm value"> </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div style="font-weight: bold; font-size: 13px; padding-top: 0px;font-size: large;margin-top:60px" class="ng-binding background-color">
+            <i></i>Property Details</div>
+          <br>
+
+          <div class="form-group">
+            <div class="col-xs-12 labelType" style="word-wrap: break-word;">
+              <div class="col-xs-2">
+                <label class="control-label boldText">Listing Name</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookStay.stayName"> {{bookedUniqueHomeModel.bookStay.stayName}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookStay.stayName"> null </div>
+              </div>
+
+              <div class="col-xs-2">
+                <label class="control-label boldText">Listing Type</label>
+                <div class="form-group newForm value" *ngIf="bookedUniqueHomeModel.bookStay.listType"> {{bookedUniqueHomeModel.bookStay.listType}} </div>
+                <div class="form-group newForm value" *ngIf="!bookedUniqueHomeModel.bookStay.listType"> null </div>
+              </div>
+
+              <div class="col-xs-8">
+                <label class="control-label"></label>
+                <div class="form-group newForm value"> </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane fade in" id="s5" [ngClass]="{'display-block': selectedTab =='BookingCharges'}">
+      <ul class="nav navbar-nav navbar-left">
+        <li>
+          <div style="font-weight: bold; font-size: 13px; padding-top: 0px" class="ng-binding text-decoration ">
+            <i class="background-color"></i>Booking Charges Details</div>
+        </li>
+      </ul>
+      <br>
+
+      <table>
+        <tr class="background-color">
+          <th>Charge For</th>
+          <th>Amount</th>
+
+        </tr>
+        <tr *ngFor="let charge of bookedUniqueHomeModel.bookCharges">
+          <td>{{charge.svcSCatgDesc}}</td>
+          <td>{{charge.amount}}</td>
+
+        </tr>
+        <tr class="background-color">
+          <td>Total Amount</td>
+          <td>{{bookedUniqueHomeModel.totalAmount}}</td>
+
+        </tr>
+
+      </table>
+    </div>
+
+    <div class="tab-pane fade in" id="s6" [ngClass]="{'display-block': selectedTab =='Attachments'}">
+
+      <div class="content">
+        <div class="well">
+          <div class="row">
+            <div class="col-lg-6" style="padding-top: 15px;" *ngFor="let attachment of bookedUniqueHomeModel.attachments">
+              <div class="ui-fileupload-content ui-widget-content ui-corner-bottom image-container ">
+                <div class="col-md-10 " style="padding-top:10px">
+                  <div class="col-md-12" *ngIf="attachment.attachmentUrl">
+                    <img class="image-size" style="width: 100%;
+                    height: 172px;" src="{{ApiUrl.IMAGE_URI}}{{attachment.attachmentUrl}}" />
+                    <video style="width: 50px;    padding-top: 5px;" controls *ngIf="attachment.attachmentType === attachmentType.Video">
+                      <source src="{{ApiUrl.IMAGE_URI}}{{attachment.attachmentUrl}}" type="video/mp4">
+                    </video>
+                    <a *ngIf="attachment.attachmentId === 0" target="__blank" style="max-width: 100%;word-wrap: break-word;">{{attachment.fileName}}</a>
+                    <a *ngIf="attachment.attachmentId > 0" href="{{ApiUrl.IMAGE_URI}}{{attachment.attachmentUrl}}" target="__blank" style="max-width: 100%;word-wrap: break-word;color:#3276b1">{{attachment.fileName}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- </div> -->
+</div>
+
+
+
+
+
+<!-- </div> -->
+
+
+<!-- <router-outlet></router-outlet> -->

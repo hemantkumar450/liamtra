@@ -1,0 +1,61 @@
+<!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+<div style="padding: 10px 14px;position: relative;">
+  <hy-navbar [totalDB]="totalRecords" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar>
+  <hy-tableheader [disabledAddNewButton]="disabledAddNewButton" [tableHeader]="moduleName" [addFunctionName]="addFunctionName"></hy-tableheader>
+  <p-dataTable [value]="uniqueBookedHomes" scrollHeight="300px" [globalFilter]="gb" [rows]="10" [paginator]="false" [paginator]="false"
+    [rows]="pageSize" [responsive]="true" (onSort)="onSorting($event)" (onFilter)="onFiltering($event)">
+    <p-column field="genValue" header="Transaction Id" filterMatchMode="contains" [style]="{'text-align':'center','word-wrap':'break-word'}"
+      [filter]="true" [sortable]="true"></p-column>
+    <p-column field="hostName" header="Host Name" filterMatchMode="contains" [style]="{'text-align':'center','word-wrap':'break-word'}"
+      [filter]="true" [sortable]="true"></p-column>
+    <p-column field="guestName" header="Guest Name" filterMatchMode="contains" [style]="{'text-align':'center','word-wrap':'break-word'}"
+      [filter]="true" [sortable]="true"></p-column>
+    <p-column field="stayName" header="Listing Name" filterMatchMode="contains" [style]="{'width':'100px','text-align':'center','word-wrap':'break-word'}"
+      [filter]="true" [sortable]="true"></p-column>
+    <p-column field="guestEmail" header="Guest Email" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+      [sortable]="true">
+      <ng-template let-col let-uniqueHome="rowData" pTemplate="body">
+        <div *ngIf="uniqueHome.guestEmail">
+          {{uniqueHome.guestEmail | truncate: 2}}
+        </div>
+      </ng-template>
+    </p-column>
+    <p-column field="guestPhone" header="Guest Contact" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+      [sortable]="true">
+    </p-column>
+    <p-column field="checkIn" header="Check In" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true" [sortable]="true">
+      <ng-template let-col let-uniqueHome="rowData" pTemplate="body">
+        <div *ngIf="uniqueHome.checkIn">
+          {{uniqueHome.checkIn|date }}
+        </div>
+      </ng-template>
+    </p-column>
+    <p-column field="checkOut" header="Check Out" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+      [sortable]="true">
+      <ng-template let-col let-uniqueHome="rowData" pTemplate="body">
+        <div *ngIf="uniqueHome.checkIn">
+          {{uniqueHome.checkOut|date }}
+        </div>
+      </ng-template>
+    </p-column>
+
+    <p-column field="totalAmount" header="Total Amount" [style]="{'text-align':'center','word-wrap':'break-word'}"
+      [sortable]="true">
+      <ng-template let-col let-uniqueHome="rowData" pTemplate="body">
+        <div *ngIf="uniqueHome.totalAmount">
+          {{uniqueHome.totalAmount| number : '1.2-2'}}
+        </div>
+      </ng-template>
+    </p-column>
+    <p-column styleClass="col-button" [style]="{'width':'100px','cursor':'pointer','word-wrap':'break-word'}" header="Actions">
+      <ng-template let-home="rowData" pTemplate="body">
+        <div style="padding-left: 40%">
+          <span>
+            <i class="fa fa-fw fa-eye fa-lg" (click)="editHome(home)"></i>
+          </span>
+        </div>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+  <p-paginator [hidden]="totalRecords<pageSize" [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="pageChanged($event)"></p-paginator>
+</div>

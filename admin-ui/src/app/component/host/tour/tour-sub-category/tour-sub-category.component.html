@@ -1,0 +1,70 @@
+<p-growl [(value)]="messageModel" life="3000"></p-growl>
+<div class="content" style="padding-right:20px;padding-left: 20px">
+
+  <div class="well" style="padding-bottom: 0px;margin-bottom: 0px;">
+    <app-manage-component [header]="header" [iconClass]="iconClass" [type]="type" (saveChange)="saveTourSubCategories()" (cancelChange)="cancel()"></app-manage-component>
+
+    <div class="row m-r-0">
+
+      <div class="col-lg-12">
+        <div>
+
+          <!-- class=" col-lg-offset-1" -->
+          <div class="form-group col-lg-12" style="padding-left: 3px">
+
+            <!-- <div *ngFor="let incls of hostTourInclusions; let i = index;">
+
+              <div *ngFor="let catgs of incls.hostTourCategoryModel">
+                <div>
+                  <div>
+                    <span>{{catgs.svcCatgDesc}}</span>
+                    <div>
+                      <div *ngFor="let subCatgs of catgs.hostTourSubCatagoryModel">
+                        <p-checkbox binary="true" [(ngModel)]="subCatgs.isLinkingActive"></p-checkbox>
+                        <span>{{subCatgs.svcSCatgDesc}} </span>
+                        <div>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div>
+
+              <li style="padding-top:20px">
+
+                <ul>
+                  <li *ngFor="let catgs of hostServiceCategoryModel; let i = index;">
+                    <p-checkbox binary="true" [(ngModel)]="catgs.isSelected" (click)='selectUnselectCategories(catgs.hostServiceLinkingSubCategories ,catgs.svcCatgId , catgs.isSelected)'></p-checkbox>
+                    <span class="badge">
+                      <i class="icon-minus-sign"></i>{{catgs.svcCatgDesc}}</span>
+                    <ul style="padding:10px">
+                      <li *ngFor="let subCatgs of catgs.hostServiceLinkingSubCategories" style ='padding-left:10px'>
+
+                        <p-checkbox binary="true" [(ngModel)]="subCatgs.isSelected" (click)='selectUnselectSubCategory(subCatgs)'></p-checkbox>
+                        <span>{{subCatgs.svcSCatgDesc}} </span>
+
+
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

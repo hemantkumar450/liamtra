@@ -1,0 +1,16 @@
+<div [ngClass]="{'is-visible':isVideoModal === true }" class="cd-user-modal" style="z-index: 12;">
+
+    <div class="cd-user-modal-container-terms-conditions">
+        <p class="popup-close-button">
+            <img style="width: 4%;" (click)="closeModal()" src="assets/images/roundCloseIcon.png">
+        </p>
+
+        <div class="cd-switcher">
+            <div class="col-xs-12">
+                <video controls style="height:400px; width:800px;vertical-align: top;" controlsList="nodownload" [src]="videobaseModal.videoSrc"
+                    type="video/mp4" controls autoplay>
+                </video>
+            </div>
+        </div>
+    </div>
+</div>

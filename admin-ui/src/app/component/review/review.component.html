@@ -1,0 +1,25 @@
+<div style="padding: 10px 14px;position: relative;">
+	<hy-navbar [totalDB]="totalDB" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar>
+	<hy-tableheader [disabledAddNewButton]="disabledAddNewButton" [tableHeader]="moduleName" [addFunctionName]="addFunctionName"></hy-tableheader>
+
+	<p-dataTable [value]="ReviewList" [globalFilter]="gb" scrollable="true" scrollHeight="300px" [rows]="10" [paginator]="true"
+	 [pageLinks]="3" [responsive]="true">
+		<p-column field="userName" filterMatchMode="contains" header="User Name" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+		 [sortable]="true"></p-column>
+		<p-column field="svcTypeName" filterMatchMode="contains" header="Service Type Name" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+		 [sortable]="true"></p-column>
+		<p-column field="reviewRemarks" filterMatchMode="contains" header="Review Remarks" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+		 [sortable]="true"></p-column>
+		<p-column field="isActive" filterMatchMode="contains" header="Is Active" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+		 [sortable]="true"></p-column>
+		<p-column styleClass="col-button" [style]="{'width':'200px','cursor':'pointer'}" header="Actions">
+			<ng-template let-reviewData="rowData" pTemplate="body">
+				<div style="padding-left: 40%">
+					<span>
+						<i class="fa fa-fw fa-edit fa-lg" (click)="editReview(reviewData.reviewId)"></i>
+					</span>
+				</div>
+			</ng-template>
+		</p-column>
+	</p-dataTable>
+</div>

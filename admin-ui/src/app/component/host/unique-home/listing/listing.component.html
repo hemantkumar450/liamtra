@@ -1,0 +1,70 @@
+<div class="content">
+  <div class="well">
+    <div class="row">
+      <div class="col-lg-6" style="padding-top: 15px;">
+        <div class="form-group">
+          <label class="control-label required">You would like to list </label>
+          <div>
+            <p-dropdown name="userType" placeholder='Please Select list' [options]="likeList" (onChange)="onSelected(roomType)" [(ngModel)]="uniqueHome.hostStayDetail.listType"
+              filter="true" [style]="{'width':'40em','height': '27px'}"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Property Type </label>
+          <div>
+            <p-dropdown name="Property" [options]="properties" (onChange)="onSelected(property)" [(ngModel)]="uniqueHome.hostStayDetail.propertyType"
+              placeholder='Please Select Property Type' filter="true" [style]="{'width':'40em','height': '27px'}"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Give a name to your listing </label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.hostStayDetail.stayName" class="form-control ng-pristine ng-valid">
+
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Total number of rooms </label>
+          <div>
+            <p-dropdown name="rooms" [options]="rooms" [(ngModel)]="uniqueHome.hostStayDetail.numberOfRooms" placeholder='Please Select rooms'
+              filter="true" [style]="{'width':'40em','height': '27px'}"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Total number of Beds </label>
+          <div>
+            <p-dropdown name="userType" placeholder='Please Select Beds' [options]="beds" [(ngModel)]="uniqueHome.hostStayDetail.numberOfBeds"
+              filter="true" [style]="{'width':'40em','height': '27px'}"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Total number of Bathrooms</label>
+          <div>
+            <p-dropdown name="Bathrooms" placeholder='Please Select Bathrooms' [options]="bathrooms" [(ngModel)]="uniqueHome.hostStayDetail.numberOfBathRooms"
+              filter="true" [style]="{'width':'40em','height': '27px'}"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required"> Max. guests allowed in each room
+          </label>
+          <div>
+            <p-dropdown name="room" placeholder='Please Select each room' [options]="guestRooms" [(ngModel)]="uniqueHome.hostStayDetail.numberOfGuestsInRoom"
+              filter="true" [style]="{'width':'40em','height': '27px'}"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Price of each room</label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.hostStayDetail.roomPrice" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Cleaning fee</label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.hostStayDetail.cleaningFee" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

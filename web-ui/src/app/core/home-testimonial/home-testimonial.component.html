@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>{{header}}</h2>
+      <ul class="bxslider">
+        <li *ngFor="let review of div.review;let index= index">
+          <div *ngIf="index<=3">
+            <div class="testi-in">
+              {{review.reviewRemarks}}
+            </div>
+            <div class="test-cont">
+              <img style="float: left;margin-right: 2%;" src="assets/images/test-img.png" width="52" height="52">
+              <span>{{review.userName}}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

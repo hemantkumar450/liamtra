@@ -1,0 +1,72 @@
+<style>
+	.inputType {
+		border-radius: 4px !important
+	}
+
+	.dropDown {
+		height: 32px !important
+	}
+</style>
+
+<!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+<div class="content">
+	<div class="well">
+		<app-manage-component [header]="reviewModel.Header" [iconClass]="reviewModel.IconClass"  (saveChange)="saveUser()"
+		 (cancelChange)="onCancel()"></app-manage-component>
+		<div class="row">
+			<div class="form-group">
+				<div class="col-xs-4">
+					<div>
+						<label class="control-label">User Name</label>
+					</div>
+					<div>
+						<input [disabled]="true" type="text" OnlyAlphaNumeric="true" class="form-control inputType" [(ngModel)]="reviewModel.userName" />
+					</div>
+				</div>
+
+				<div class="col-xs-4">
+					<div>
+						<label class="control-label">Rating Value</label>
+					</div>
+					<div>
+						<input type="text" OnlyAlphaNumeric="true" class="form-control inputType" [(ngModel)]="reviewModel.reviewRatingValue" />
+					</div>
+				</div>
+
+
+				<div class="col-xs-4">
+					<div>
+						<label class="control-label">Review Remarks</label>
+					</div>
+					<div>
+						<input type="text" OnlyAlphaNumeric="true" class="form-control inputType" [(ngModel)]="reviewModel.reviewRemarks" />
+					</div>
+				</div>
+
+
+				<div class="col-xs-4">
+					<div>
+						<label class="control-label">Service Type</label>
+					</div>
+					<div>
+						<input [disabled]="true" type="text" class="form-control inputType" [(ngModel)]="reviewModel.svcTypeName" />
+					</div>
+				</div>
+
+
+				<div class="col-xs-4" *ngIf='reviewModel.reviewId > 0' style='padding-top:8px'>
+					<div class="form-group">
+						<div class="form-group">
+							<label class="control-label"></label>
+							<div>
+								<label>Is Active</label>
+								<input type="checkbox" [(ngModel)]="reviewModel.isActive" name="IsSecure" style="margin-left: 15px">
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

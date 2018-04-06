@@ -1,0 +1,38 @@
+<!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+<div class="content">
+  <div class="well">
+    <app-manage-component [header]="country.Header" [iconClass]="country.IconClass"  (saveChange)="saveCountryDetail()"
+      (cancelChange)="cancel()"></app-manage-component>
+
+    <div class="row">
+      <div class="col-lg-6">
+
+        <div class="form-group">
+          <label class="control-label required">Country Code</label>
+          <div>
+            <input type="text" 
+            [maxlength]="100" OnlyAlphaNumeric="true" name="database" [(ngModel)]="country.countryCode" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label required">Country Name </label>
+          <div>
+            <input type="text" 
+            [maxlength]="200" OnlyAlphaNumeric="true" name="database" [(ngModel)]="country.countryName" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="country.countryId > 0">
+          <label>Is Active</label>
+          
+            <input type="checkbox" [(ngModel)]="country.isActive" name="IsSecure" style="margin-left: 15px">
+        
+        </div>
+
+      </div>
+      <div class="col-lg-6"></div>
+    </div>
+
+  </div>
+</div>

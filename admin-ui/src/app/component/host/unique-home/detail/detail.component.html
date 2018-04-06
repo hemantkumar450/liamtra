@@ -1,0 +1,46 @@
+<div class="content">
+  <div class="well">
+    <div class="row">
+      <div class="col-lg-6" style="padding-top: 15px;">
+        <div class="form-group">
+          <label class="control-label required">Status </label>
+          <div>
+            <p-dropdown placeholder='Please Select' filter="true" [style]="{'width':'80%'}" [options]="statusList" name="statusList"
+              [(ngModel)]="uniqueHome.svcStatus"></p-dropdown>
+            <!-- <input type="text" name="database" [(ngModel)]="uniqueHome.hostName" class="form-control ng-pristine ng-valid"> -->
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Host Name </label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.hostName" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Describe </label>
+          <div>
+            <textarea type="text" name="database" rows="5" cols="70" [(ngModel)]="uniqueHome.hostDesc" class="form-control ng-pristine ng-valid"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Email Id</label>
+          <div>
+            <input type="text" name="database" class="form-control ng-pristine ng-valid" [(ngModel)]="uniqueHome.eMailId">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Phone No</label>
+          <div>
+            <input type="text" name="database" class="form-control ng-pristine ng-valid" [(ngModel)]="uniqueHome.contactNo">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Languages</label>
+          <div>
+            <p-multiSelect [style]="{'width':'40em','height': '27px'}" [options]="languages" [(ngModel)]="selectedLanguages" (onChange)="onMultiselectChange(101,$event)"></p-multiSelect>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

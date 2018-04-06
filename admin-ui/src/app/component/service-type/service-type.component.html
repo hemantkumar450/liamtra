@@ -1,0 +1,28 @@
+<div style="padding: 10px 14px;position: relative;">
+  <hy-navbar [totalDB]="totalDB" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar>
+  <hy-tableheader [tableHeader]="moduleName" [addFunctionName]="addFunctionName" (addnewSource)="addnewSource()"></hy-tableheader>
+
+  <p-dataTable [value]="ServiceTypes" [globalFilter]="gb" scrollable="true" scrollHeight="300px" [rows]="10" [paginator]="true"
+    [pageLinks]="3" [responsive]="true">
+    <p-column field="svcTypeCode" header="Service Type Code"  [filter]="true" [sortable]="true" filterMatchMode="contains">
+      <!-- <ng-template let-sysConstant="rowData" pTemplate="body"  [style]="{'text-align':'center'}">
+        <div class="hfaDatabase"> {{sysConstant.svcTypeCode}} </div>
+      </ng-template> -->
+    </p-column>
+    <p-column field="svcTypeName" header="Service Type Name" [style]="{'text-align':'center'}"  filterMatchMode="contains" [filter]="true" [sortable]="true"></p-column>
+    <p-column field="isActive" header="Is Active" [style]="{'text-align':'center'}" filterMatchMode="contains"  [filter]="true" [sortable]="true"></p-column>
+    <p-column styleClass="col-button" [style]="{'width':'200px','cursor':'pointer'}" header="Actions">
+      <ng-template let-sysConstant="rowData" pTemplate="body">
+        <div style="padding-left: 30%">
+          <span>
+            <i class="fa fa-fw fa-edit fa-lg" (click)="editServiceType(sysConstant.svcTypeId)"></i>
+          </span>
+          <span>|</span>
+          <span>
+            <i class="fa fa-fw fa-trash-o txt-color-red fa-lg" (click)="delete(sysConstant)"></i>
+          </span>
+        </div>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+</div>

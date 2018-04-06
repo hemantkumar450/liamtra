@@ -1,0 +1,38 @@
+<!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+<div class="content">
+  <div class="well">
+    <app-manage-component [header]="city.Header" [iconClass]="city.IconClass"  (saveChange)="saveCity()" (cancelChange)="cancel()"></app-manage-component>
+
+    <div class="row">
+      <div class="col-lg-6" style="padding-top: 15px;">
+
+        <div class="form-group">
+          <label class="control-label required">City Code</label>
+          <div>
+            <input type="text" 
+            [maxlength]="100" OnlyAlphaNumeric="true" name="database" [(ngModel)]="city.cityCode" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label required">City Name </label>
+          <div>
+            <input type="text" 
+            [maxlength]="200" OnlyAlphaNumeric="true" name="database" [(ngModel)]="city.cityName" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+
+        <div class="form-group" *ngIf="city.cityId > 0">
+          <label>Is Active</label>
+
+          <input type="checkbox" [(ngModel)]="city.isActive" style="margin-left: 15px" name="IsSecure">
+
+        </div>
+
+      </div>
+
+      <div class="col-lg-6"></div>
+    </div>
+
+  </div>
+</div>

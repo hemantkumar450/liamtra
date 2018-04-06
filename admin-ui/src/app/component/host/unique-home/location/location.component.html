@@ -1,0 +1,66 @@
+<div class="content">
+  <div class="well">
+    <div class="row">
+      <div class="col-lg-6" style="padding-top: 15px;">
+        <div class="form-group">
+          <label class="control-label required">Country</label>
+          <div>
+            <p-dropdown name="userType" (onChange)="getStatesByCountryId()" placeholder='Please Select Country' [(ngModel)]="uniqueHome.countryId"
+              filter="true" [style]="{'width':'40em','height': '27px'}" [options]="countries"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">State</label>
+          <div>
+            <p-dropdown name="userType" placeholder='Please Select State' (onChange)="getCitiesByStateId()" [(ngModel)]="uniqueHome.stateId"
+              filter="true" [style]="{'width':'40em','height': '27px'}" [options]="states"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">City</label>
+          <div>
+            <p-dropdown name="userType" placeholder='Please Select City' [(ngModel)]="uniqueHome.cityId" filter="true" [style]="{'width':'40em','height': '27px'}"
+              [options]="cities"></p-dropdown>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label ">Landmark (optional) </label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.landmark" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Flat / House No./ Floor/ Building *
+          </label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.address1" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Street / Locality / Colony *</label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.address2" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Pincode </label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.zipCode" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Latitude </label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.latitude" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label required">Longitude </label>
+          <div>
+            <input type="text" name="database" [(ngModel)]="uniqueHome.longitude" class="form-control ng-pristine ng-valid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

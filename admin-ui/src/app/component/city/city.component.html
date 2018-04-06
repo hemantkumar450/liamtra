@@ -1,0 +1,57 @@
+<p-growl life="3000"></p-growl>
+<!-- <p-growl [(value)]="s" life="3000"></p-growl> -->
+
+<div style="padding: 10px 14px;position: relative;">
+
+
+  <p-panel header="Filter Search" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+    <form class="smart-form ng-untouched ng-pristine ng-valid">
+      <fieldset>
+        <div class="row">
+          <section class="col col-1">
+            <label class="input">Country</label>
+          </section>
+          <section class="col col-3">
+            <p-dropdown placeholder='Please Select' filter="true" [style]="{'width':'80%'}" [options]="countries" name="Country" [(ngModel)]="countryId"
+              (onChange)="getStateDDO()"></p-dropdown>
+          </section>
+          <section class="col col-1">
+            <label class="input">State</label>
+          </section>
+          <section class="col col-3">
+            <p-dropdown placeholder='Please Select' filter="true" [style]="{'width':'80%'}" [options]="states" name="state" [(ngModel)]="stateId"></p-dropdown>
+          </section>
+        </div>
+      </fieldset>
+
+      <footer>
+        <button class="btn btn-primary" (click)="getCityList()">
+          Search
+        </button>
+      </footer>
+    </form>
+  </p-panel>
+
+
+  <hy-navbar [totalDB]="totalDB" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar>
+  <hy-tableheader [tableHeader]="moduleName" [addFunctionName]="addFunctionName" (addnewSource)="addCity($event)"></hy-tableheader>
+
+  <p-dataTable [value]="cities" [globalFilter]="gb" scrollable="true" scrollHeight="300px" [rows]="10" [paginator]="true" [pageLinks]="3"
+    [responsive]="true">
+    <p-column field="cityCode" header="City Code" filterMatchMode="contains" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+      [sortable]="true"></p-column>
+    <p-column field="cityName" header="City Name" filterMatchMode="contains" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+      [sortable]="true"></p-column>
+    <p-column field="isActive" header="Is Active" filterMatchMode="contains" [style]="{'text-align':'center','word-wrap':'break-word'}" [filter]="true"
+      [sortable]="true"></p-column>
+    <p-column styleClass="col-button" [style]="{'width':'200px','cursor':'pointer'}" header="Actions">
+      <ng-template let-city="rowData" pTemplate="body">
+        <div style="padding-left: 40%">
+          <span>
+            <i class="fa fa-fw fa-edit fa-lg" (click)="editCity(city)"></i>
+          </span>
+        </div>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+</div>

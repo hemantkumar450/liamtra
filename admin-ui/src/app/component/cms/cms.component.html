@@ -1,0 +1,19 @@
+<!-- <p-growl [(value)]="messageModal" life="3000"></p-growl> -->
+<div style="padding: 10px 14px;position: relative;">
+  <hy-navbar [totalDB]="totalDB" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar>
+  <hy-tableheader [tableHeader]="moduleName" [addFunctionName]="addFunctionName" (addnewSource)="addCms($event)"></hy-tableheader>
+
+  <p-dataTable [value]="cmsList" [globalFilter]="gb" scrollable="true" scrollHeight="300px" [rows]="10" [paginator]="true"
+    [pageLinks]="3" [responsive]="true">
+    <p-column field="sysConstantDesc" filterMatchMode="contains" header="System Constant" [style]="{'text-align':'center'}" [filter]="true" [sortable]="true"></p-column>
+    <p-column styleClass="col-button" [style]="{'width':'200px','cursor':'pointer','word-wrap':'break-word'}" header="Actions">
+      <ng-template let-serviceCategory="rowData" pTemplate="body">
+        <div style="padding-left: 40%">
+          <span>
+            <i class="fa fa-fw fa-edit fa-lg" (click)="editCms(serviceCategory)"></i>
+          </span>
+        </div>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+</div>

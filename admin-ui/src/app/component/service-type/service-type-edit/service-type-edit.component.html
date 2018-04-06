@@ -1,0 +1,41 @@
+<!-- <p-growl [(value)]="msgs" life="3000"></p-growl> -->
+<div class="content">
+  <!-- <hy-navbar [totalDB]="totalDB" [moduleName]="moduleName" [faIcon]="faIcon"></hy-navbar> -->
+  <div class="well">
+    <app-manage-component [header]="serviceType.Header" [iconClass]="serviceType.IconClass"  (saveChange)="saveServiceType()"
+      (cancelChange)="cancel()"></app-manage-component>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-lg-8 col-lg-offset-1" style="padding-top: 15px;">
+
+
+
+
+          <div class="form-group">
+            <label class="control-label required">Service Type Code</label>
+            <div>
+              <input type="text" 
+              [maxlength]="200" OnlyAlphaNumeric="true" name="server" [(ngModel)]="serviceType.svcTypeCode" class="form-control ng-pristine ng-valid">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label required">Service Type Name</label>
+            <div>
+              <input type="text" 
+              [maxlength]="500" OnlyAlphaNumeric="true" name="database" [(ngModel)]="serviceType.svcTypeName" class="form-control ng-pristine ng-valid">
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="serviceType.svcTypeId > 0">
+            <label>Is Active</label>
+      
+              <input type="checkbox" [(ngModel)]="serviceType.isActive" name="IsSecure" style="margin-left: 15px">
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="content">
+  <div class="well">
+    <div class="row">
+      <div class="col-lg-2" style="padding-top: 15px;">
+        <P>Videos</P>
+        <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="video/*" maxFileSize="1000000" (onSelect)="onVideoUpload($event)"
+          auto="true" chooseLabel="Browse"></p-fileUpload>
+      </div>
+      <div *ngFor="let video of uniqueHome.allAttachments; let index=index">
+        <div class="col-lg-3" style="padding-top: 15px;" *ngIf="video.attachmentType === videotype && video.isActive">
+          <div class="form-group">
+            <video controls *ngIf="video.attachmentDataBase64" style="height:115px; width:200px;vertical-align: top;" controlsList="nodownload"
+              [src]="video.attachmentDataBase64" type="video/mp4" controls autoplay>
+            </video>
+            <video controls *ngIf="!video.attachmentDataBase64" style="height:115px; width:200px;vertical-align: top;" controlsList="nodownload"
+              [src]="video.attachmentUrl" type="video/mp4" controls autoplay>
+            </video>
+            <a style="cursor:pointer" (click)="deleteAttachment(index)">
+              <p style="font-size: 15px;padding: 0 0 0px 0px;">
+                <span> {{index+1}}</span>
+                <img src="../../../../../assets/img/cancel.png " style="height:17px;cursor: pointer"> </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="tab-pane fade  in " [ngClass]="{'display-block': selectedTab =='Info'}" id="s1">
+
+    <div class="content">
+        <div class="well">
+
+            <div class="collapse navbar-collapse custom-bordered-bottom " style="padding: 0px 0px 5px 0px">
+                <ul class="nav navbar-nav navbar-left">
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right" style="margin-right: -1%;">
+                    <li style="margin-right: 10px;">
+                        <button class="btn btn-primary " (click)="onTourRouteAdd()">Add New</button>
+                        <button class="btn btn-success active bg-color-blue custom-color-white" (click)="saveHostTourRoute()">Save</button>
+                        <button class="btn btn-danger active bg-color-red custom-color-white" (click)="cancel()">Cancel</button>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="row">
+
+                <p-dataTable [value]="hostTourRoutes">
+                    <p-column field="Country Name" header="Country" [sortable]="true">
+                        <ng-template let-row="rowData" pTemplate="body">
+                            <p-dropdown name="userType" placeholder='Please Select Country ' [style]="{'width':'100%'}" filter="true" [options]="countries"
+                                [(ngModel)]="row.countryId" (onChange)="getStatesByCountryId(row)"></p-dropdown>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="State" header="State" [sortable]="true">
+                        <ng-template let-row="rowData" let-ri="rowIndex" pTemplate="body">
+                            <p-dropdown name="userType" placeholder='Please Select State' [style]="{'width':'100%'}" filter="true" [options]="row.selectedState"
+                                [(ngModel)]="row.stateId" (onChange)="getCityListByStateId(row)"></p-dropdown>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="City" header="City" [sortable]="true">
+                        <ng-template let-row="rowData" pTemplate="body">
+                            <p-dropdown name="userType" [style]="{'width':'100%'}" placeholder='Please Select  City' filter="true" [options]="row.selectedCity"
+                                [(ngModel)]="row.cityId"></p-dropdown>
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template let-row="rowData" pTemplate="body">
+                            <span (click)="onRouteDelete(row)">
+                                <i class="fa fa-trash  fa-md  m3 m6 edit" aria-hidden="true"></i>
+                            </span>
+                        </ng-template>
+                    </p-column>
+
+                </p-dataTable>
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>

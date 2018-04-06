@@ -1,0 +1,40 @@
+<style>
+  .attachment {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 50px;
+    color: #888;
+    background: #fafafa;
+    border: 1px solid #ccc;
+  }
+</style>
+
+<div class="content">
+  <div class="well">
+    <div class="row">
+      <div class="col-lg-2" style="padding-top: 15px;">
+        <P>Images</P>
+        <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize="1000000" (onSelect)="onImageUpload($event)"
+          auto="true" chooseLabel="Browse"></p-fileUpload>
+      </div>
+      <div *ngFor="let image of uniqueHome.allAttachments; let index=index">
+        <div class="col-lg-2" style="padding-top: 15px;" *ngIf="image.attachmentType === imageType && image.isActive">
+          <div class="form-group">
+            <img class="attachment" *ngIf="image.attachmentDataBase64" style="margin-bottom: 9%;margin-left: -1%;" [src]="image.attachmentDataBase64"
+            />
+            <img class="attachment" *ngIf="!image.attachmentDataBase64" style="margin-bottom: 9%;margin-left: -1%;" [src]="image.attachmentUrl"
+            />
+            <a style="cursor:pointer" (click)="deleteAttachment(index)">
+              <p style="font-size: 15px;padding: 0 0 0px 0px;">
+                <span> {{index+1}}</span>
+                <img src="../../../../../assets/img/cancel.png " style="height:17px;cursor: pointer"> </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
